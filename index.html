@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<!-- Version 2.0 -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	
+	<title>Link Builder</title>
+	
+	<!-- Bootstrap core CSS -->
+	<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	
+	<!-- Custom styles for this template -->
+	<link href="css/logo-nav.css" rel="stylesheet">
+	<meta charset="UTF-8" />
+	<script>
+		function paramAdd(name) {
+			var idWdsFormTable = $("#idWdsFormTable");
+			var tr_name = "tr_" + name;
+			$("#idWdsFormTable").prepend(
+			    '<tr id="' + tr_name + '">' +  
+				'<td><label for="' + name + '" ></label>' + name + '</td>' +
+				'<td><input type="text" size="80" class="field" id="' + name + '" name="' + name + '"></td>' +
+				'<td><a href="#" onclick="endisable(event); return false;" class="disable">disable/enable</a></td>' +
+				'</tr>'
+			);
+			var newline = document.getElementById(tr_name);
+			newline.focus();
+		}
+		function endisable(e) {
+			var $input = $(e.target).closest("tr").find(":input");
+			return !$input.attr("disabled", !$input.is(":disabled"));
+		}
+		function customInput() {
+			var name = document.getElementById("idAddInputValue").value;
+			if(name == "") {
+				alert("Please enter an input name.");
+				return false;
+			} else {
+				if (document.getElementById(name) == null) {
+					paramAdd(name);
+				} else {
+					alert("Oops. Looks like " + name + " already exists");
+					return false;
+				}
+			}
+		}
+	</script>
+	
+</head>
+
+<body>
+	
+	<!-- Navigation -->
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+		<div class="container">
+		  <a class="navbar-brand" href="#">
+			The Link Builder
+		  </a>
+		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		  </button>
+		  <div class="collapse navbar-collapse" id="navbarResponsive">
+			<ul class="navbar-nav ml-auto">
+			  <li class="nav-item">
+				<a class="nav-link" href="/index.html">Home</a>
+			  </li>
+			</ul>
+		  </div>
+		</div>
+	  </nav>
+	
+	<!-- Page Content -->
+	<div id="0" class="container">
+		<h2>URL configuration</h2>
+		<form name="WDS_FORM_CONFIG" action=".">
+			<p> 
+				<label for="WDS_METHOD">Method</label> 
+				<select onchange="document.WDS_FORM.method = this.value;" name="WDS_METHOD">
+					<option selected="selected" value="post">post</option>
+					<option value="get">get</option>
+				</select> 
+				<label for="WDS_TARGET">target</label>
+					<input type="text" size="15" onChange="document.WDS_FORM.target = this.value;" name="WDS_TARGET" id="WDS_TARGET" value="" />
+					<label for="WDS_ACTION">action</label>
+					<input type="text" size="80" onChange="document.WDS_FORM.action = this.value;" name="WDS_ACTION" id="WDS_ACTION" value="https://site.domain.tld/path/to/resource/" />
+			</p>
+			<p>
+				<input type="button" onclick="document.WDS_FORM.submit();" class="button" value="Submit" />
+			</p>
+		</form>
+		<h2>Parameter configuration</h2>
+		<p>Use this button to add a new POST or GET parameter to your link</p>
+		<input type="button" id="addInput" onclick="customInput()" class="button" value="Add param" />
+		<input type="text" id="idAddInputValue" />
+		<p>
+			<form action="https://site.domain.tld/path/to/resource/" method="post" name="WDS_FORM" id="WDS_FORM" target="">
+				<table class="table-hover">
+					<tbody id="idWdsFormTable">
+					</tbody>
+				</table>
+			</form>
+		</p>
+	</div>
+	<!-- /.container section -->
+	
+	<!-- Bootstrap core JavaScript -->
+	<script src="vendor/jquery/jquery.min.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	
+</body>
+
+</html>
