@@ -80,12 +80,12 @@
 			<p> 
 				<label for="WDS_METHOD">Method</label> 
 				<select onchange="document.WDS_FORM.method = this.value;" name="WDS_METHOD">
-					<option selected="selected" value="post">post</option>
-					<option value="get">get</option>
+					<option selected="selected" value="POST">post</option>
+					<option value="GET">get</option>
 				</select> 
 				<label for="WDS_TARGET">target</label>
-					<input type="text" size="15" onChange="document.WDS_FORM.target = this.value;" name="WDS_TARGET" id="WDS_TARGET" value="" />
-					<label for="WDS_ACTION">action</label>
+					<input type="text" size="15" onChange="document.WDS_FORM.target = this.value;" name="WDS_TARGET" id="WDS_TARGET" value="" /><br />
+					<label for="WDS_ACTION">URL</label>
 					<input type="text" size="80" onChange="document.WDS_FORM.action = this.value;" name="WDS_ACTION" id="WDS_ACTION" value="https://site.domain.tld/path/to/resource/" />
 			</p>
 			<p>
